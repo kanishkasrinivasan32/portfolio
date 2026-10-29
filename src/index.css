@@ -1,0 +1,94 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Values below are copied from the reference site's compiled stylesheet. */
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.9%;
+    --border: 0 0% 89.8%;
+    --radius: 0.5rem;
+  }
+  * {
+    border-color: hsl(var(--border));
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-ivory font-sans text-navy antialiased;
+    overflow-x: hidden;
+  }
+  ::selection {
+    background: rgb(200, 121, 72);
+    color: rgb(245, 240, 230);
+  }
+  :focus-visible {
+    outline: rgb(200, 121, 72) solid 2px;
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+  section[id] {
+    scroll-margin-top: 88px;
+  }
+}
+
+/* Film-grain overlay */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Lenis smooth-scroll */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.hero-grid {
+  background-image: linear-gradient(to right, rgba(16, 38, 55, 0.055) 1px, transparent 1px);
+  background-size: clamp(80px, 9vw, 140px) 100%;
+  mask-image: linear-gradient(black 55%, transparent 100%);
+  -webkit-mask-image: linear-gradient(black 55%, transparent 100%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .animate-marquee {
+    animation: none;
+  }
+}
+
+/* Custom sleek scrollbar for modal/dark containers */
+.custom-dark-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(245, 240, 230, 0.25) transparent;
+}
+.custom-dark-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+.custom-dark-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.custom-dark-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(245, 240, 230, 0.25);
+  border-radius: 9999px;
+}
+.custom-dark-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(200, 121, 72, 0.7);
+}
+
